@@ -6,19 +6,9 @@ import { useTodos } from "../context/todocontext";
 
 const TodoList = () => {
   const { todos, loading, toggleComplete, deleteTodo, addTodo } = useTodos();
-  const [newTodo, setNewTodo] = useState("");
 
   if (loading) return <p>Loading...</p>;
 
-  const handleAddTodo = () => {
-    addTodo({
-      id: Date.now(),
-      title: newTodo,
-      completed: false,
-    });
-    setNewTodo("");
-    };
-  
     const handleToggleTodo = (id) => {
     toggleComplete(id);
     };
@@ -36,13 +26,7 @@ const TodoList = () => {
   	<h1>Todo List</h1>
 
   	<div>
-    	<input
-      	type="text"
-      	value={newTodo}
-      	onChange={(e) => setNewTodo(e.target.value)}
-      	placeholder="Add a new todo"
-    	/>
-    	<button onClick={handleAddTodo}>Add Todo</button>
+    	<TodoForm addTodo={addTodo}/>
   	</div>
 
       <ul>

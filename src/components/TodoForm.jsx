@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
-// TODO: Identify the missing parameters required in TodoForm
-const TodoForm = ({}) => {
+const TodoForm = ({ addTodo }) => {
+  const [newTodo, setNewTodo] = useState("");
+
+  const handleAddTodo = () => {
+    if (newTodo.trim()) {
+      addTodo({ id: Date.now(), title: newTodo, completed: false });
+      setNewTodo("");
+    }
+  };
+
   return (
     <div>
       <input
@@ -10,12 +18,7 @@ const TodoForm = ({}) => {
         onChange={(e) => setNewTodo(e.target.value)}
         placeholder="Enter todo title"
       />
-      <button
-        onClick={() => {
-          // TODO: Add the new todo when the button is clicked
-          // TODO: Clear the input field after adding the todo
-        }}
-      >
+      <button onClick={handleAddTodo}>
         Add Todo
       </button>
     </div>
